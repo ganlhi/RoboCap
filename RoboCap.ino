@@ -8,7 +8,7 @@
 #define MOTOR_PIN_4  12     // IN4 on the ULN2003 driver 1
 #define HALFSTEP 8
 #define CAP_OPENED_POS 0
-#define CAP_CLOSED_POS 3072 // 270 degrees
+#define CAP_CLOSED_POS 2048 // 180 degrees
 
 // Initialize with pin sequence IN1-IN3-IN2-IN4 for using the AccelStepper with 28BYJ-48
 AccelStepper stepper(HALFSTEP, MOTOR_PIN_1, MOTOR_PIN_3, MOTOR_PIN_2, MOTOR_PIN_4);
@@ -38,13 +38,15 @@ void setup() {
   stepper.setAcceleration(100.0);
   stepper.setSpeed(200);
 
-  stepper.setCurrentPosition(mode < 2 ? CAP_CLOSED_POS : CAP_OPENED_POS);
+  stepper.setCurrentPosition(mode == 0 ? CAP_CLOSED_POS : CAP_OPENED_POS);
 
   Serial.println("INIT OK");
 }
 
 void loop() {
   if (mode != nextMode && (nextMode == 0 || nextMode == 1)) {
+    Serial.print("Next mode: ");
+    Serial.println(nextMode);
     if (nextMode == 0) {
       stepper.runToNewPosition(CAP_CLOSED_POS);
     }
