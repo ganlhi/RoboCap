@@ -7,8 +7,8 @@
 #define MOTOR_PIN_3  11     // IN3 on the ULN2003 driver 1
 #define MOTOR_PIN_4  12     // IN4 on the ULN2003 driver 1
 #define HALFSTEP 8
-#define CAP_OPENED_POS 0
-#define CAP_CLOSED_POS 2048 // 180 degrees
+#define CAP_OPENED_POS 4477 // 180 degrees : 2048 * 94 / 43 (gears ratio)
+#define CAP_CLOSED_POS 0
 
 // Initialize with pin sequence IN1-IN3-IN2-IN4 for using the AccelStepper with 28BYJ-48
 AccelStepper stepper(HALFSTEP, MOTOR_PIN_1, MOTOR_PIN_3, MOTOR_PIN_2, MOTOR_PIN_4);
